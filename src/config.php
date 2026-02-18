@@ -13,10 +13,10 @@ DB_PASSWORD: Contraseña del usuario e la BD
 
 /*¿Cómo se obtiene el valor de una variable de entorno en PHP?
 A través de la función: gentenv*/
-define('DB_HOST', getenv('mariadb'));
-define('DB_NAME', getenv('pokemon_db'));
-define('DB_USER', getenv('aliciasp'));
-define('DB_PASSWORD', getenv('alicia')); 
+define('DB_HOST', getenv('MARIADB_HOST'));
+define('DB_NAME', getenv('MARIADB_DATABASE'));
+define('DB_USER', getenv('MARIADB_USER'));
+define('DB_PASSWORD', getenv('MARIADB_PASSWORD')); 
 
 
 /*Otra alternativa es definir directamente los parámetros de conexión en vez de copiarlos de las variables de entorno:
