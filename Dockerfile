@@ -15,7 +15,7 @@ ENV TZ=Europe/Madrid
 ENV MARIADB_HOST=mariadb
 ENV MARIADB_DATABASE=pokemon_db
 ENV MARIADB_USER=aliciasp
-ENV MARIADB_PASSWORD=aliciasainz2004
+ENV MARIADB_PASSWORD=alicia
 
 # RUN: Permite definir los comandos que se van a ejecutar SOBRE LA IMAGEN BASE. En este caso: ubuntu:24.04
 # Actualización e instalación de apache y  todos las paquetes necesarios para ejecutar PHP y conectar a MARIADB.
@@ -42,6 +42,8 @@ COPY /conf/000-default.conf /etc/apache2/sites-available/
 # La instrucción EXPOSE no publica el puerto al exterior, solo informa a Docker.
 EXPOSE 80
 
+RUN chown -R www-data:www-data /var/www/html && \
+    chmod -R 755 /var/www/html
 #ENTRYPOINT: Permite definir el primer comando que ejecutarán los contenedores que se creen a partir de la imagen
 # En este caso iniciamos el servicio de apache y se le pasa las opciones: "-D" y "FOREGRAUND"
 ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]

@@ -13,12 +13,13 @@ include_once("config.php");
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">	
-	<title>CRUD PHP</title>
+	<title>Pokemons</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <div>
 	<header>
-		<h1>APLICACION CRUD PHP</h1>
+		<h1>APLICACIÓN POKEMONS</h1>
 	</header>
 	<main> 
 	<?php
@@ -43,13 +44,13 @@ include_once("config.php");
 	<form method="post" action="login_action.php">
 			<div>
 				<label for="email">Email</label>
-				<input type="email" name="email" id="email" placeholder="correo electrónico" required>
+				<input type="email" name="email" id="email" placeholder="correo electrónico" class="form-control" required>
 			</div>
 			<div>
 				<label for="password">Contraseña</label>
-				<input type="password" name="password" id="password" placeholder="contraseña" required>
+				<input type="password" name="password" id="password" placeholder="contraseña" class="form-control" required>
 			</div>
-		<button type="submit" name="inicia" value="si">Iniciar sesión</button>
+		<button type="submit" name="inicia" value="si" class="btn btn-primary">Iniciar sesión</button>
 	</form>
 	<p><a href="index.php">Volver</a></p>
 	</main>

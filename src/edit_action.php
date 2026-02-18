@@ -1,6 +1,11 @@
 <?php
 //Incluye fichero con parámetros de conexión a la base de datos
 include_once("config.php");
+session_start();
+if (!isset($_SESSION['username'])) {
+	header("Location: login.php");
+	exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +18,7 @@ include_once("config.php");
 <body>
 <div>
 	<header>
-		<h1>APLICACION CRUD PHP</h1>
+		<h1>APLICACION POKEMONS</h1>
 	</header>
 	<main>				
 
@@ -35,53 +40,50 @@ PHP proporciona el array asociativo $_POST para acceder a la información enviad
 */
 
 	$identificador = $mysqli->real_escape_string($_POST['identificador']);
-	$username = $mysqli->real_escape_string($_POST['username']);
-	$password = $mysqli->real_escape_string($_POST['password']);
-	$email = $mysqli->real_escape_string($_POST['email']);
-	$name = $mysqli->real_escape_string($_POST['name']);
-	$surname = $mysqli->real_escape_string($_POST['surname']);
-	$age = $mysqli->real_escape_string($_POST['age']);
-	$job = $mysqli->real_escape_string($_POST['job']);
-	if (empty($age)) {
-    $age = "NULL";} 
-	else {
-    $age = intval($age);}
+    $n_pokedex     = $mysqli->real_escape_string($_POST['n_pokedex']);
+    $nombre        = $mysqli->real_escape_string($_POST['nombre']);
+    $tipo          = $mysqli->real_escape_string($_POST['tipo']);
+    $region        = $mysqli->real_escape_string($_POST['region']);
+    $habilidad     = $mysqli->real_escape_string($_POST['habilidad']);
+    $descripcion   = $mysqli->real_escape_string($_POST['descripcion']);
+	if(empty($nombre) || empty($n_pokedex) || empty($tipo)) {
+        echo "<div class='alert alert-danger'>Error: Los campos Nombre, Nº Pokedex y Tipo son obligatorios.</div>";
+        echo "<a href='javascript:self.history.back();' class='btn btn-secondary'>Volver atrás</a>";
+    } 
+    else {
+        // 4. Ejecución de la sentencia UPDATE
+        // IMPORTANTE: Los nombres de las columnas deben coincidir con database.sql
+        $sql = "UPDATE pokemons SET 
+                    nº_pokedex = '$n_pokedex', 
+                    nombre = '$nombre', 
+                    tipo = '$tipo', 
+                    region = '$region', 
+                    habilidad = '$habilidad', 
+                    descripcion = '$descripcion' 
+                WHERE pokemons_id = $identificador";
 
-/*Con mysqli_real_scape_string protege caracteres especiales en una cadena para ser usada en una sentencia SQL.
-Esta función es usada para crear una cadena SQL legal que se puede usar en una sentencia SQL. 
-Los caracteres codificados son NUL (ASCII 0), \n, \r, \, ', ", y Control-Z.
-Ejemplo: Entrada sin escapar: "O'Reilly" contiene una comilla simple (').
-Escapado con mysqli_real_escape_string(): Se convierte en "O\'Reilly", evitando que la comilla se interprete como el fin de una cadena en SQL.
-*/	
+        if($mysqli->query($sql)) {
+            // Si la actualización es exitosa, redirigimos a home.php
+            header("Location: home.php");
+        } else {
+            // Si hay un error en la base de datos
+            echo "<div class='alert alert-danger'>Error al actualizar: " . $mysqli->error . "</div>";
+            echo "<a href='home.php' class='btn btn-secondary'>Volver al inicio</a>";
+        }
+    }
+} else {
+    // Si alguien intenta entrar a esta página sin pasar por el formulario
+    header("Location: home.php");
+}
 
-//Se comprueba si existen campos del formulario vacíos
-	if(empty($email) || empty($username) || empty($password)) 
-	{
-		if(empty($email)) {
-			echo "<div>Campo email vacío.</div>";
-		}
-		if(empty($username)) {
-			echo "<div>Campo nombre de usuario vacío.</div>";
-		}
-		if(empty($password)) {
-			echo "<div>Campo contraseña vacío.</div>";
-		}
-		$mysqli->close();
-		echo "<a href='javascript:self.history.back();'>Volver atras</a>";
-	} //fin si
-	else //Se realiza la modificación de un registro de la BD. 
-	{
-		//Se actualiza el registro a modificar: update
-		$sql="UPDATE empleados SET nombre_usuario = '$username', contrasena = '$password', correo = '$email', nombre = '$name', apellido = '$surname',  edad = $age, puesto = '$job' WHERE id = $identificador";
-		//echo 'SQL: ' . $sql . '<br>';
-		$mysqli->query($sql);
-		$mysqli->close();
-        echo "<div>Empleado editado correctamente...</div>";
-		echo "<a href='home.php'>Ver resultado</a>";
-        //Se redirige a la página principal: home.php
-        //header("Location: home.php");
-	}// fin sino
-}//fin si
+// Cerramos la conexión
+$mysqli->close();
+?>
+
+</body>
+</html>
+
+
 ?>
 
     

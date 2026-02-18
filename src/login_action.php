@@ -55,7 +55,7 @@ session_start();
 				//Nota: También se puede utilizar el método fetch_assoc de la siguiente manera: $fila = $resultado->fetch_assoc();
 				//Comprueba la contraseña. Recuerda que en este ejemplo la contraseña se almacena en texto plano (no es seguro). En un entorno real debe estar cifrada o al menos hasheada
 				$fila = $resultado->fetch_array();
-				if ($password !== $fila['contrasena']) {
+				if (!password_verify($password, $fila['contrasena'])) {
 					//Contraseña incorrecta
 					$_SESSION['login_error'] = 'Contraseña incorrecta';
 					echo 'Contraseña incorrecta<br>';

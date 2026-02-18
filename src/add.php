@@ -24,48 +24,52 @@ if (!isset($_SESSION['username'])) {
 La página: add.php se encargará de proceder a la inserción del registro en la tabla de empleados
 -->
 
-	<form action="add_action.php" method="post">
+	<form method="post" action="add_action.php">
 		<div>
-			<label for="email">Correo</label>
-			<input type="email" name="email" id="email" placeholder="correo electrónico" required>
+			<label>Nº Pokedex:</label>
+			<input type="number" name="n_pokedex" required>
 		</div>
 		<div>
-			<label for="username">Usuario</label>
-			<input type="text" name="username" id="username" placeholder="nombre usuario" required>
+			<label>Nombre:</label>
+			<input type="text" name="nombre" required>
 		</div>
 		<div>
-			<label for="name">Contraseña</label>
-			<input type="password" name="password" id="password" placeholder="contraseña" required>
+			<label>Tipo:</label>
+			<input type="text" name="tipo" placeholder="Ej: Fuego/Volador" required>
 		</div>
 		<div>
-			<label for="name">Nombre</label>
-			<input type="text" name="name" id="name" placeholder="nombre">
+			<label>Descripción:</label>
+			<textarea name="descripcion"></textarea>
 		</div>
-
 		<div>
-			<label for="surname">Apellido</label>
-			<input type="text" name="surname" id="surname" placeholder="apellido">
+			<label>Habilidad:</label>
+			<input type="text" name="habilidad" required>
 		</div>
-
 		<div>
-			<label for="age">Edad</label>
-			<input type="number" name="age" id="age" placeholder="edad">
+			<label>Región:</label>
+			<select name="region" required>
+				<option value="Kanto">Kanto</option>
+				<option value="Johto">Johto</option>
+				<option value="Hoenn">Hoenn</option>
+				<option value="Sinnoh">Sinnoh</option>
+				<option value="Teselia">Teselia</option>
+				<option value="Kalos">Kalos</option>
+				<option value="Alola">Alola</option>
+				<option value="Galar">Galar</option>
+				<option value="Paldea">Paldea</option>
+			</select>
 		</div>
-
 		<div>
-			<label for="job">Puesto</label>
-			<select name="job" id="job" placeholder="puesto">
-				<option value="" disabled selected>Seleccione un puesto</option>
-				<option value="administrativo">administrativo</option>
-				<option value="contable">contable</option>
-				<option value="dependiente">dependiente</option>
-				<option value="empleado">empleado</option>
-				<option value="gerente">gerente</option>
-				<option value="repartidor">repartidor</option>
-				<option value="repartidor">usuario</option>
-			</select>	
+			<label>Generación:</label>
+			<select name="generacion" required>
+				<option value="1º">1º</option>
+				<option value="2º">2º</option>
+				<option value="3º">3º</option>
+				<option value="4º">4º</option>
+				<option value="5º">5º</option>
+				<option value="9º">9º</option>
+			</select>
 		</div>
-
 		<div>
 			<button type="submit" name="inserta" value="si">Aceptar</button>
 			<button type="button" onclick="location.href='home.php'">Cancelar</button>

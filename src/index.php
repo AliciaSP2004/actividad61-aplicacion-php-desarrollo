@@ -13,12 +13,12 @@ include_once("config.php");
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">	
-	<title>CRUD PHP</title>
+	<title>Pokemons</title>
 </head>
 <body>
 <div>
 	<header>
-		<h1>APLICACION CRUD VANILLA PHP</h1>
+		<h1>APLICACIÓN POKEMONS</h1>
 	</header>
 
 	<main>

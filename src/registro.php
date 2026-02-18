@@ -26,7 +26,9 @@
 		</div>
 		<div>
 			<label for="name">Contraseña</label>
-			<input type="password" name="password" id="password" placeholder="contraseña" required>
+			<input class="form-control" type="password" name="password" id="password" placeholder="contraseña" required>
+			<label for="name">Confirmar Contraseña</label>
+			<input class="form-control" type="password" name="confirm_password" id="confirm_password" placeholder="confirmar contraseña" required>
 		</div>
 		<div>
 			<button type="submit" name="inserta" value="si">Aceptar</button>

@@ -24,6 +24,7 @@ include_once("config.php");
 		$email = $mysqli->real_escape_string($_POST['email']);
 		$username = $mysqli->real_escape_string($_POST['username']);
 		$password = $mysqli->real_escape_string($_POST['password']);
+		$password_hash = password_hash($password, PASSWORD_DEFAULT);
 		
 		if(empty($email) || empty($username) || empty($password) ) 
 		{
@@ -35,6 +36,9 @@ include_once("config.php");
 			}
 			if(empty($password)) {
 				echo "<div>Campo contraseña vacío.</div>";
+			}
+			if ($_POST['password'] !== $_POST['confirm_password']) {
+    			die("Las contraseñas no coinciden");
 			}
 			
 			$mysqli->close();

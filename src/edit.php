@@ -40,20 +40,19 @@ if (!isset($_SESSION['username'])) {
 
 
 	//Se selecciona el registro a modificar: select
-	$sql="SELECT nombre_usuario, contrasena, correo, apellido, nombre, edad, puesto FROM empleados WHERE id = $identificador";
+	$sql="SELECT * FROM pokemons WHERE pokemons_id = $identificador";
 	//echo 'SQL: ' . $sql . '<br>';
 	$resultado = $mysqli->query($sql);
 
 	//Se extrae el registro y lo guarda en el array $fila
 	//Nota: También se puede utilizar el método fetch_assoc de la siguiente manera: $fila = $resultado->fetch_assoc();
 	$fila = $resultado->fetch_array();
-	$username = $fila['nombre_usuario'];
-	$password = $fila['contrasena'];
-	$email = $fila['correo'];
-	$surname = $fila['apellido'];
-	$name = $fila['nombre'];
-	$age = $fila['edad'];
-	$job = $fila['puesto'];
+	$numero = $fila['nº_pokedex'];
+	$nombre = $fila['nombre'];
+	$tipo = $fila['tipo'];
+	$region = $fila['region'];
+	$generacion = $fila['generacion'];
+	$descripcion = $fila['descripcion'];
 
 	//Se cierra la conexión de base de datos
 	$mysqli->close();
@@ -61,56 +60,71 @@ if (!isset($_SESSION['username'])) {
 
 <!--FORMULARIO DE EDICIÓN. Al hacer click en el botón Guardar, llama a la página (form action="edit_action.php"): edit_action.php-->
 
-	<form action="edit_action.php" method="post">
-		<div>
-			<label for="email">Correo</label>
-			<input type="email" name="email" id="email" value="<?php echo $email;?>" readonly>
-		</div>
-		<div>
-			<label for="username">Usuario</label>
-			<input type="text" name="username" id="username" value="<?php echo $username;?>" readonly>
-		</div>
-		<div>
-			<label for="name">Contraseña</label>
-			<input type="password" name="password" id="password" value="<?php echo $password;?>" required>
-		</div>	
-		<div>
-			<label for="name">Nombre</label>
-			<input type="text" name="name" id="name" value="<?php echo $name;?>" >
-		</div>
+	<form action="edit_action.php" method="post" class="shadow p-4 bg-white rounded">
+    
+    <input type="hidden" name="identificador" value="<?php echo $identificador; ?>">
 
-		<div>
-			<label for="surname">Apellido</label>
-			<input type="text" name="surname" id="surname" value="<?php echo $surname;?>">
-		</div>
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <label for="n_pokedex" class="form-label fw-bold">Nº Pokedex</label>
+            <input type="number" name="n_pokedex" id="n_pokedex" class="form-control" value="<?php echo $n_pokedex; ?>" readonly>
+        </div>
 
-		<div>
-			<label for="age">Edad</label>
-			<input type="number" name="age" id="age" value="<?php echo $age;?>">
-		</div>
+        <div class="col-md-8 mb-3">
+            <label for="nombre" class="form-label fw-bold">Nombre</label>
+            <input type="text" name="nombre" id="nombre" class="form-control" value="<?php echo $nombre; ?>" required>
+        </div>
+    </div>
 
-		<div>
-			<label for="job">Puesto</label>
-			<select name="job" id="job" placeholder="puesto">
-				<option value="<?php echo $job;?>" selected><?php echo $job;?></option>
-				<option value="administrativo">administrativo</option>
-				<option value="contable">contable</option>
-				<option value="dependiente">dependiente</option>
-				<option value="empleado">empleado</option>
-				<option value="gerente">gerente</option>
-				<option value="repartidor">repartidor</option>
-				<option value="repartidor">usuario</option>
-			</select>	
-		</div>
+    <div class="mb-3">
+        <label for="tipo" class="form-label fw-bold">Tipo</label>
+        <input type="text" name="tipo" id="tipo" class="form-control" value="<?php echo $tipo; ?>" placeholder="Ej: Eléctrico">
+    </div>
+
+    <div class="mb-3">
+        <label for="region" class="form-label fw-bold">Región</label>
+        <select name="region" id="region" class="form-select">
+            <option value="<?php echo $region; ?>" selected><?php echo $region; ?> (Actual)</option>
+            <hr>
+            <option value="Kanto">Kanto</option>
+            <option value="Johto">Johto</option>
+            <option value="Hoenn">Hoenn</option>
+            <option value="Sinnoh">Sinnoh</option>
+            <option value="Teselia">Teselia</option>
+            <option value="Kalos">Kalos</option>
+            <option value="Alola">Alola</option>
+            <option value="Galar">Galar</option>
+            <option value="Paldea">Paldea</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="habilidad" class="form-label fw-bold">Habilidad</label>
+        <input type="text" name="habilidad" id="habilidad" class="form-control" value="<?php echo $habilidad; ?>">
+    </div>
+
+    <div class="mb-4">
+        <label for="descripcion" class="form-label fw-bold">Descripción de la Pokedex</label>
+        <textarea name="descripcion" id="descripcion" class="form-control" rows="3"><?php echo $descripcion; ?></textarea>
+    </div>
+
+	 <div class="mb-3">
+		<label for="generacion" class="form-label fw-bold">Generación</label>
+		<select name="generacion" id="generacion" class="form-select">
+			<option value="<?php echo $generacion; ?>" selected><?php echo $generacion; ?> (Actual)</option>
+			<hr>
+			<option value="1º">1º</option>
+			<option value="2º">2º</option>
+			<option value="3º">3º</option>
+			<option value="4º">4º</option>
+			<option value="5º">5º</option>
+			<option value="9º">9º</option>
+		</select>
 
 		<div >
 			<input type="hidden" name="identificador" value=<?php echo $identificador;?>>
 			<button type="submit" name="modifica" value="si">Aceptar</button>
-			<button type="button" onclick="location.href='home.php'">Cancelar</button>
-			
-
-			
-			
+			<button type="button" onclick="location.href='home.php'">Cancelar</button>	
 		</div>
 	</form>
 	</main>	

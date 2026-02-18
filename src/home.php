@@ -41,11 +41,11 @@ $email = $_SESSION['email'] ?? '';
 	<table border="1">
 	<thead>
 		<tr>
-			<th>Usuario</th>
+			<th>Nº_Pokedex</th>
 			<th>Nombre</th>
-			<th>Apellido</th>
-			<th>Edad</th>
-			<th>Puesto</th>
+			<th>Tipo</th>
+			<th>Region</th>
+			<th>Generacion</th>
 			<th>Acciones</th>
 		</tr>
 	</thead>
@@ -55,7 +55,7 @@ $email = $_SESSION['email'] ?? '';
 /*Se realiza una consulta de selección la tabla empleados ordenados y almacena todos los registros en una estructura especial PARECIDA a una "tabla" llamada $resultado.
 Cada fila y cada columna de la tabla se corresponde con un registro y campo de la tabla EMPLEADOS.
 */
-$sql="SELECT * FROM empleados ORDER BY apellido, nombre";
+$sql="SELECT * FROM pokemons ORDER BY nombre ASC";
 //echo $sql.'<br>';
 $resultado = $mysqli->query($sql);
 
@@ -116,17 +116,17 @@ De los nueves campos de la tabla empleados solo se muestran algunos en la tabla 
 
 	while($fila = $resultado->fetch_array()) {
 		echo "<tr>\n";
-		echo "<td>".$fila['nombre_usuario']."</td>\n";
+		echo "<td>".$fila['nº_pokedex']."</td>\n";
 		echo "<td>".$fila['nombre']."</td>\n";
-		echo "<td>".$fila['apellido']."</td>\n";
-		echo "<td>".$fila['edad']."</td>\n";
-		echo "<td>".$fila['puesto']."</td>\n";
+		echo "<td>".$fila['tipo']."</td>\n";
+		echo "<td>".$fila['region']."</td>\n";
+		echo "<td>".$fila['generacion']."</td>\n";
 		echo "<td>";
 /* En la última columna se añade dos enlaces para editar y modificar el registro correspondiente. 
 Los datos se pueden enviar entre distintas páginas siguiendo distintos métodos. En este caso el id del registro a editar/eliminar se pasa a través de la URL. 
 Este forma de pasar el dato se conoce como: método GET*/
-		echo "<a href=\"edit.php?identificador=$fila[id]\">Edición</a>\n";
-		echo "<a href=\"delete.php?identificador=$fila[id]\" onClick=\"return confirm('¿Está segur@ que desea eliminar el empleado/a?')\" >Baja</a></td>\n";
+		echo "<a href=\"edit.php?identificador=$fila[pokemon_id]\">Edición</a>\n";
+		echo "<a href=\"delete.php?identificador=$fila[pokemon_id]\" onClick=\"return confirm('¿Está segur@ que desea eliminar el empleado/a?')\" >Baja</a></td>\n";
 		echo "</td>";
 		echo "</tr>\n";
 	}//fin mientras
