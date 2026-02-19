@@ -13,7 +13,7 @@ include("config.php");
 <body>
 <div>
 	<header>
-		<h1>APLICACION POKEMONS</h1>
+		<h1>APLICACION POKEDEX</h1>
 	</header>
 	<main>
 

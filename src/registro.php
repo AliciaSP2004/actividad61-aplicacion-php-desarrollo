@@ -9,7 +9,7 @@
 <body>
 <div>
 	<header>
-		<h1>APLICACION CRUD PHP</h1>
+		<h1>APLICACION POKEMON</h1>
 	</header>
 	<main>				
 	<h2>Registro</h2>

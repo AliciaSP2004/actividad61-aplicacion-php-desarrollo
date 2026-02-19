@@ -1,68 +1,66 @@
 <?php
-
 include_once("config.php");
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">	
-	<title>Registro</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
+    <title>Registro - Pokédex</title>
 </head>
 <body>
-	<header>
-		<h1>APLICACION CRUD PHP</h1>
-	</header>
-	<main>
+    <header>
+        <h1>APLICACIÓN POKEMON</h1>
+    </header>
+    <main>
 
 <?php
+if(isset($_POST['inserta'])) 
+{
+    $email = $mysqli->real_escape_string($_POST['email']);
+    $username = $mysqli->real_escape_string($_POST['username']);
+    $password = $_POST['password']; // No escapamos para el hash
+    $confirm_password = $_POST['confirm_password'];
 
-	//echo $_POST['inserta'].'<br>';
-	if(isset($_POST['inserta'])) 
-	{
-		$email = $mysqli->real_escape_string($_POST['email']);
-		$username = $mysqli->real_escape_string($_POST['username']);
-		$password = $mysqli->real_escape_string($_POST['password']);
-		$password_hash = password_hash($password, PASSWORD_DEFAULT);
-		
-		if(empty($email) || empty($username) || empty($password) ) 
-		{
-			if(empty($email)) {
-				echo "<div>Campo correo electrónico vacío.</div>";
-			}
-			if(empty($username)) {
-				echo "<div>Campo nombre de usuario vacío.</div>";
-			}
-			if(empty($password)) {
-				echo "<div>Campo contraseña vacío.</div>";
-			}
-			if ($_POST['password'] !== $_POST['confirm_password']) {
-    			die("Las contraseñas no coinciden");
-			}
-			
-			$mysqli->close();
-			echo "<a href='javascript:self.history.back();'>Volver atras</a>";
-		} //fin si
-		else //Sino existen campos de formulario vacíos se procede al alta del nuevo registro
-		{
-	//Se ejecuta una sentencia SQL. Inserta (da de alta) el nuevo registro: insert.
-			//echo 'Email: ' . $email . '<br>';
-			//echo 'Usuario: ' . $username . '<br>';
-			//echo 'Contraseña: ' . $password . '<br>';
-			$result = $mysqli->query("INSERT INTO empleados (correo, nombre_usuario, contrasena) VALUES ('$email', '$username', '$password')");	
-			//Se cierra la conexión
-			$mysqli->close();
-			//echo "<div>Usuario registrado correctamente...</div>";
-			//echo "<a href='index.php'>Volver</a>";
-			//Se redirige a la página principal: index.php
-			header("Location:index.php");
-		}//fin sino
-	}
-	?>
+    // 1. VALIDACIONES BÁSICAS
+    if(empty($email) || empty($username) || empty($password)) 
+    {
+        echo "<div>Error: Todos los campos son obligatorios.</div>";
+        echo "<a href='javascript:self.history.back();'>Volver atrás</a>";
+    } 
+    elseif ($password !== $confirm_password) 
+    {
+        echo "<div>Error: Las contraseñas no coinciden.</div>";
+        echo "<a href='javascript:self.history.back();'>Volver atrás</a>";
+    }
+    else 
+    {
+        // 2. CIFRADO DE CONTRASEÑA (Fundamental para login_action.php)
+        $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
-		<!--<div>Registro añadido correctamente</div>
-		<a href='index.php'>Ver resultado</a>-->
-	</main>
+        // 3. INSERCIÓN EN LA TABLA CORRECTA ('usuario')
+        // Usamos los nombres de columnas de tu database.sql: nombre_usuario, contrasena, correo
+        $sql = "INSERT INTO usuario (correo, nombre_usuario, contrasena) VALUES ('$email', '$username', '$password_hash')";
+
+        if($mysqli->query($sql)) 
+        {
+            echo "<div>Usuario registrado correctamente.</div>";
+            echo "<a href='login.php'>Ir al inicio de sesión</a>";
+        } 
+        else 
+        {
+            echo "<div>Error al registrar: " . $mysqli->error . "</div>";
+            echo "<a href='javascript:self.history.back();'>Volver atrás</a>";
+        }
+    }
+    $mysqli->close();
+} 
+else 
+{
+    header("Location: registro.php");
+}
+?>
+    </main>
 </body>
 </html>

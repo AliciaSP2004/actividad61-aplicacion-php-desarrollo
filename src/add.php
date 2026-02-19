@@ -16,7 +16,7 @@ if (!isset($_SESSION['username'])) {
 <body>
 <div>
 	<header>
-		<h1>APLICACION CRUD PHP</h1>
+		<h1>APLICACION POKEDEX</h1>
 	</header>
 	<main>				
 	<h2>Alta</h2>
@@ -67,6 +67,9 @@ La página: add.php se encargará de proceder a la inserción del registro en la
 				<option value="3º">3º</option>
 				<option value="4º">4º</option>
 				<option value="5º">5º</option>
+				<option value="6º">6º</option>
+				<option value="7º">7º</option>
+				<option value="8º">8º</option>
 				<option value="9º">9º</option>
 			</select>
 		</div>
@@ -80,7 +83,7 @@ La página: add.php se encargará de proceder a la inserción del registro en la
 	<footer>
 		<p><a href="home.php">Volver</a></p>	
 		<p><a href="logout.php">Cerrar sesión (Sign out) <?php echo $_SESSION['username']; ?></a></p>
-		Created by the IES Miguel Herrero team &copy; 2026
+		Created by Alicia &copy; 2026
   	</footer>
 </div>
 </body>

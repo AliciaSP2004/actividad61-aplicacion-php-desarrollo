@@ -36,7 +36,7 @@ include_once("config.php");
 
 	</main>
 	<footer>
-    	Created by the IES Miguel Herrero team &copy; 2026
+    	Created by Alicia&copy; 2026
   	</footer>
 </div>
 </body>
