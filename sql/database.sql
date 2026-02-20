@@ -10,16 +10,17 @@ CREATE TABLE usuario (
   creacion TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO usuario (nombre_usuario, contrasena, correo, nombre, apellido, edad, pais) VALUES('juan', 'usuario@1','juan@gmail.com', 'Juan', 'Abascal', 30, 'Chile');
-INSERT INTO usuario (nombre_usuario, contrasena, correo, nombre, apellido, edad, pais) VALUES('jaime', 'usuario@1','jaime@gmail.com', 'Jaime', 'Garandal', 40, 'España');
-INSERT INTO usuario (nombre_usuario, contrasena, correo, nombre, apellido, edad, pais) VALUES('francisco', 'usuario@1','francisco@gmail.com', 'Francisco', 'Sierra', 38, 'Francia');
-INSERT INTO usuario (nombre_usuario, contrasena, correo, nombre, apellido, edad, pais) VALUES('aitana', 'usuario@1','aitana@gmail.com', 'Aitana', 'Sainz', 20, 'Puerto Rico');
-INSERT INTO usuario (nombre_usuario, contrasena, correo, nombre, apellido, edad, pais) VALUES('alicia', 'usuario@1','alicia@gmail.com', 'Alicia', 'Sainz', 21, 'España');
-INSERT INTO usuario (nombre_usuario, contrasena, correo,nombre , apellido , edad , pais) VALUES('jana', 'usuario@1','jana@gmail.com','Jana','Llama', 50,'Estados Unidos');
-INSERT INTO usuario (nombre_usuario, contrasena, correo,nombre , apellido , edad , pais) VALUES('albaro', 'usuario@1','albaro@gmail.com', 'Albaro','Zamanillo' , 25,'Zambia');
-INSERT INTO usuario (nombre_usuario, contrasena, correo, nombre, apellido, edad, pais) VALUES('pepe', 'usuario@1','pepe@gmail.com', 'Pepe', 'González', 91, 'China');
-INSERT INTO usuario (nombre_usuario, contrasena, correo, nombre, apellido, edad, pais) VALUES('alberto', 'usuario@1','alberto@gmail.com', 'Alberto', 'Sainz', 22, 'España');
-INSERT INTO usuario (nombre_usuario, contrasena, correo, nombre, apellido, edad, pais) VALUES('isabel', 'usuario@1','isabel@gmail.com', 'Isabel', 'Pérez', 21, 'España');
+INSERT INTO usuario (nombre_usuario, contrasena, correo, nombre, apellido, edad, pais) VALUES('juan','$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi','juan@gmail.com', 'Juan', 'Abascal', 30, 'Chile');
+INSERT INTO usuario (nombre_usuario, contrasena, correo, nombre, apellido, edad, pais) VALUES('hernesto','$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi','hernesto@gmail.com', 'Hernesto', 'García', 45, 'España');
+INSERT INTO usuario (nombre_usuario, contrasena, correo, nombre, apellido, edad, pais) VALUES('jaime','$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi','jaime@gmail.com', 'Jaime', 'Garandal', 40, 'España');
+INSERT INTO usuario (nombre_usuario, contrasena, correo, nombre, apellido, edad, pais) VALUES('francisco','$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi','francisco@gmail.com', 'Francisco', 'Sierra', 38, 'Francia');
+INSERT INTO usuario (nombre_usuario, contrasena, correo, nombre, apellido, edad, pais) VALUES('aitana','$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi','aitana@gmail.com', 'Aitana', 'Sainz', 20, 'Puerto Rico');
+INSERT INTO usuario (nombre_usuario, contrasena, correo, nombre, apellido, edad, pais) VALUES('alicia','$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi','alicia@gmail.com', 'Alicia', 'Sainz', 21, 'España');
+INSERT INTO usuario (nombre_usuario, contrasena, correo,nombre , apellido , edad , pais) VALUES('jana','$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi','jana@gmail.com','Jana','Llama', 50,'Estados Unidos');
+INSERT INTO usuario (nombre_usuario, contrasena, correo,nombre , apellido , edad , pais) VALUES('albaro','$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi','albaro@gmail.com', 'Albaro','Zamanillo' , 25,'Zambia');
+INSERT INTO usuario (nombre_usuario, contrasena, correo, nombre, apellido, edad, pais) VALUES('pepe','$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi','pepe@gmail.com', 'Pepe', 'González', 91, 'China');
+INSERT INTO usuario (nombre_usuario, contrasena, correo, nombre, apellido, edad, pais) VALUES('alberto','$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi','alberto@gmail.com', 'Alberto', 'Sainz', 22, 'España');
+INSERT INTO usuario (nombre_usuario, contrasena, correo, nombre, apellido, edad, pais) VALUES('isabel','$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi','isabel@gmail.com', 'Isabel', 'Pérez', 21, 'España');
 
 
 
@@ -29,8 +30,8 @@ CREATE TABLE pokemons (
   nombre VARCHAR(50) NOT NULL UNIQUE,
   tipo VARCHAR(150) NOT NULL,
   descripcion VARCHAR(500),
-  habilidad VARCHAR(150) NOT NULL UNIQUE,
-  debilidad VARCHAR(150) NOT NULL,
+  habilidad VARCHAR(150),
+  debilidad VARCHAR(150),
   region ENUM('Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos', 'Alola', 'Galar', 'Hisui', 'Paldea', 'Teselia'),
   generacion ENUM('1º', '2º', '3º', '4º', '5º', '6º', '7º', '8º', '9º'),
   creacion TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
