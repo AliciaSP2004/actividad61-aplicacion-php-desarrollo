@@ -18,7 +18,7 @@ if (!isset($_SESSION['username'])) {
 <body>
 <div>
 	<header>
-		<h1>APLICACION POKEDEX</h1>
+		<h1>APLICACION POKEMONS</h1>
 	</header>
 	<main>				
 

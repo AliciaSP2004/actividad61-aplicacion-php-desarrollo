@@ -11,8 +11,7 @@ if (!isset($_SESSION['username'])) {
 }
 
 /* 3. Recoger datos del usuario desde la sesión (definidos en login_action.php) */
-$name = $_SESSION['name'] ?? 'Entrenador';
-$surname = $_SESSION['surname'] ?? '';
+$username = $_SESSION['username'] ?? 'Entrenador';
 $email = $_SESSION['email'] ?? '';
 ?>
 
@@ -31,7 +30,7 @@ $email = $_SESSION['email'] ?? '';
 
     <main>
         <div class="p-4 mb-4 bg-light rounded-3">
-            <p><strong>Bienvenido/a,</strong> <?php echo htmlspecialchars($name . " " . $surname); ?></p>
+            <p><strong>Bienvenido/a,</strong> <?php echo htmlspecialchars($username); ?></p>
             <p><strong>Email:</strong> <?php echo htmlspecialchars($email); ?></p>
             <a href="logout.php" class="btn btn-outline-secondary btn-sm">Cerrar Sesión</a>
         </div>

@@ -21,7 +21,7 @@ if (!isset($_SESSION['username'])) {
 <body>
 <div>
 	<header>
-		<h1>APLICACION POKEDEX</h1>
+		<h1>APLICACION POKEMONS</h1>
 	</header>
 	
 	<main>				
@@ -47,11 +47,13 @@ if (!isset($_SESSION['username'])) {
 	//Se extrae el registro y lo guarda en el array $fila
 	//Nota: También se puede utilizar el método fetch_assoc de la siguiente manera: $fila = $resultado->fetch_assoc();
 	$fila = $resultado->fetch_array();
-	$numero = $fila['nº_pokedex'];
+	$n_pokedex= $fila['nº_pokedex'];
 	$nombre = $fila['nombre'];
 	$tipo = $fila['tipo'];
 	$region = $fila['region'];
 	$generacion = $fila['generacion'];
+	$habilidad = $fila['habilidad'];
+	$debilidad = $fila['debilidad'];
 	$descripcion = $fila['descripcion'];
 
 	//Se cierra la conexión de base de datos
@@ -95,12 +97,18 @@ if (!isset($_SESSION['username'])) {
             <option value="Alola">Alola</option>
             <option value="Galar">Galar</option>
             <option value="Paldea">Paldea</option>
+			<option value="Hisui">Hisui</option>
+            <option value="Unova">Unova</option>
         </select>
     </div>
 
     <div class="mb-3">
         <label for="habilidad" class="form-label fw-bold">Habilidad</label>
         <input type="text" name="habilidad" id="habilidad" class="form-control" value="<?php echo $habilidad; ?>">
+    </div>
+	<div class="mb-3">
+        <label for="debilidad" class="form-label fw-bold">Debilidad</label>
+        <input type="text" name="debilidad" id="debilidad" class="form-control" value="<?php echo $debilidad; ?>">
     </div>
 
     <div class="mb-4">

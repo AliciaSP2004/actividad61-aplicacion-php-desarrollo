@@ -24,9 +24,6 @@ include_once("config.php");
 	<main> 
 	<?php
 	session_start();
-	//Asigna a la variable $error:
-	//el valor de $_SESSION['login_error'] si existe y no es null
-	//o una cadena vacía '' si no existe
 
 	$error = $_SESSION['login_error'] ?? '';
 	unset($_SESSION['login_error']);
@@ -34,13 +31,10 @@ include_once("config.php");
 
 	
 	<?php 
-	//Muestra el mensaje de error si existe
 	if ($error !== ""): ?>
 		<p style="color:#b00020;"><?php echo $error;?></p>
 	<?php endif; ?>
 
-	<!--Se solicitan las credenciales de acceso: email y password-->
-	<!--FORMULARIO DE LOGIN. Al hacer click en el botón Iniciar sesión, llama a la página: login_action.php (form action="login_action.php")-->
 	<form method="post" action="login_action.php">
 			<div>
 				<label for="email">Email</label>

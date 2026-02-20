@@ -1,26 +1,22 @@
 CREATE TABLE usuario (
-  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  usuario_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   nombre_usuario VARCHAR(50) NOT NULL UNIQUE,
   contrasena VARCHAR(255) NOT NULL,
   correo VARCHAR(150) NOT NULL UNIQUE,
-  nombre VARCHAR(100),
-  apellido VARCHAR(100),
-  edad INT UNSIGNED,
-  pais VARCHAR(100),
   creacion TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO usuario (nombre_usuario, contrasena, correo, nombre, apellido, edad, pais) VALUES('juan','$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi','juan@gmail.com', 'Juan', 'Abascal', 30, 'Chile');
-INSERT INTO usuario (nombre_usuario, contrasena, correo, nombre, apellido, edad, pais) VALUES('hernesto','$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi','hernesto@gmail.com', 'Hernesto', 'García', 45, 'España');
-INSERT INTO usuario (nombre_usuario, contrasena, correo, nombre, apellido, edad, pais) VALUES('jaime','$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi','jaime@gmail.com', 'Jaime', 'Garandal', 40, 'España');
-INSERT INTO usuario (nombre_usuario, contrasena, correo, nombre, apellido, edad, pais) VALUES('francisco','$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi','francisco@gmail.com', 'Francisco', 'Sierra', 38, 'Francia');
-INSERT INTO usuario (nombre_usuario, contrasena, correo, nombre, apellido, edad, pais) VALUES('aitana','$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi','aitana@gmail.com', 'Aitana', 'Sainz', 20, 'Puerto Rico');
-INSERT INTO usuario (nombre_usuario, contrasena, correo, nombre, apellido, edad, pais) VALUES('alicia','$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi','alicia@gmail.com', 'Alicia', 'Sainz', 21, 'España');
-INSERT INTO usuario (nombre_usuario, contrasena, correo,nombre , apellido , edad , pais) VALUES('jana','$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi','jana@gmail.com','Jana','Llama', 50,'Estados Unidos');
-INSERT INTO usuario (nombre_usuario, contrasena, correo,nombre , apellido , edad , pais) VALUES('albaro','$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi','albaro@gmail.com', 'Albaro','Zamanillo' , 25,'Zambia');
-INSERT INTO usuario (nombre_usuario, contrasena, correo, nombre, apellido, edad, pais) VALUES('pepe','$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi','pepe@gmail.com', 'Pepe', 'González', 91, 'China');
-INSERT INTO usuario (nombre_usuario, contrasena, correo, nombre, apellido, edad, pais) VALUES('alberto','$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi','alberto@gmail.com', 'Alberto', 'Sainz', 22, 'España');
-INSERT INTO usuario (nombre_usuario, contrasena, correo, nombre, apellido, edad, pais) VALUES('isabel','$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi','isabel@gmail.com', 'Isabel', 'Pérez', 21, 'España');
+INSERT INTO usuario (nombre_usuario, contrasena, correo) VALUES('juan','$2y$10$28hv3GIW8Ms9K3e.0swV2.vDM2r3LMRaVfEdU4eDoEzJgXURdlmTW','juan@gmail.com');
+INSERT INTO usuario (nombre_usuario, contrasena, correo) VALUES('hernesto','$2y$10$28hv3GIW8Ms9K3e.0swV2.vDM2r3LMRaVfEdU4eDoEzJgXURdlmTW','hernesto@gmail.com');
+INSERT INTO usuario (nombre_usuario, contrasena, correo) VALUES('jaime','$2y$10$28hv3GIW8Ms9K3e.0swV2.vDM2r3LMRaVfEdU4eDoEzJgXURdlmTW','jaime@gmail.com');
+INSERT INTO usuario (nombre_usuario, contrasena, correo) VALUES('francisco','$2y$10$28hv3GIW8Ms9K3e.0swV2.vDM2r3LMRaVfEdU4eDoEzJgXURdlmTW','francisco@gmail.com');
+INSERT INTO usuario (nombre_usuario, contrasena, correo) VALUES('aitana','$2y$10$28hv3GIW8Ms9K3e.0swV2.vDM2r3LMRaVfEdU4eDoEzJgXURdlmTW','aitana@gmail.com');
+INSERT INTO usuario (nombre_usuario, contrasena, correo) VALUES('alicia','$2y$10$28hv3GIW8Ms9K3e.0swV2.vDM2r3LMRaVfEdU4eDoEzJgXURdlmTW','alicia@gmail.com');
+INSERT INTO usuario (nombre_usuario, contrasena, correo) VALUES('jana','$2y$10$28hv3GIW8Ms9K3e.0swV2.vDM2r3LMRaVfEdU4eDoEzJgXURdlmTW','jana@gmail.com');
+INSERT INTO usuario (nombre_usuario, contrasena, correo) VALUES('albaro','$2y$10$28hv3GIW8Ms9K3e.0swV2.vDM2r3LMRaVfEdU4eDoEzJgXURdlmTW','albaro@gmail.com');
+INSERT INTO usuario (nombre_usuario, contrasena, correo) VALUES('pepe','$2y$10$28hv3GIW8Ms9K3e.0swV2.vDM2r3LMRaVfEdU4eDoEzJgXURdlmTW','pepe@gmail.com');
+INSERT INTO usuario (nombre_usuario, contrasena, correo) VALUES('alberto','$2y$10$28hv3GIW8Ms9K3e.0swV2.vDM2r3LMRaVfEdU4eDoEzJgXURdlmTW','alberto@gmail.com');
+INSERT INTO usuario (nombre_usuario, contrasena, correo) VALUES('isabel','$2y$10$28hv3GIW8Ms9K3e.0swV2.vDM2r3LMRaVfEdU4eDoEzJgXURdlmTW','isabel@gmail.com');
 
 
 

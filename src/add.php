@@ -16,7 +16,7 @@ if (!isset($_SESSION['username'])) {
 <body>
 <div>
 	<header>
-		<h1>APLICACION POKEDEX</h1>
+		<h1>APLICACION POKEMONS</h1>
 	</header>
 	<main>				
 	<h2>Alta</h2>
@@ -46,6 +46,11 @@ La página: add.php se encargará de proceder a la inserción del registro en la
 			<input type="text" name="habilidad" required>
 		</div>
 		<div>
+		<div>
+			<label>Debilidad:</label>
+			<input type="text" name="debilidad" required>
+		</div>
+		<div>
 			<label>Región:</label>
 			<select name="region" required>
 				<option value="Kanto">Kanto</option>
@@ -57,6 +62,8 @@ La página: add.php se encargará de proceder a la inserción del registro en la
 				<option value="Alola">Alola</option>
 				<option value="Galar">Galar</option>
 				<option value="Paldea">Paldea</option>
+				<option value="Unova">Unova</option>
+				<option value="Hisui">Hisui</option>
 			</select>
 		</div>
 		<div>

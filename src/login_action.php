@@ -3,11 +3,12 @@ include_once("config.php");
 session_start();
 
 if (isset($_POST['inicia'])) {
-    $email = $mysqli->real_escape_string($_POST['email']);
-    $password = $_POST['password']; // No escapamos para verificar el hash
+    $email = trim($_POST['email']);
+    $password = trim($_POST['password']); 
 
-    // BUSCAMOS EN LA TABLA 'usuario' (la de tu SQL de Pokémon)
-    $resultado = $mysqli->query("SELECT * FROM usuario WHERE correo = '$email'");
+    $email_esc = $mysqli->real_escape_string($email);
+
+    $resultado = $mysqli->query("SELECT * FROM usuario WHERE correo = '$email_esc'");
 
     if ($resultado->num_rows === 0) {
         $_SESSION['login_error'] = 'El correo no existe';
@@ -16,12 +17,11 @@ if (isset($_POST['inicia'])) {
     } else {
         $fila = $resultado->fetch_assoc();
         
-        // VERIFICAMOS LA CONTRASEÑA CIFRADA
-        if (password_verify($password, $fila['contrasena'])) {
-            // LOGIN CORRECTO: Guardamos los datos reales de tu tabla usuario
+        $hash_db = trim($fila['contrasena']);
+
+        if (password_verify($password, $hash_db)) {
+            $_SESSION['user_id'] = $fila['usuario_id'];
             $_SESSION['username'] = $fila['nombre_usuario'];
-            $_SESSION['name'] = $fila['nombre'];
-            $_SESSION['surname'] = $fila['apellido'];
             $_SESSION['email'] = $fila['correo'];
 
             header("Location: home.php");
