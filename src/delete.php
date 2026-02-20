@@ -1,51 +1,58 @@
 <?php
-//Incluye fichero con parámetros de conexión a la base de datos
+// 1. Iniciamos sesión para verificar que el usuario está logueado (Seguridad Ejercicio 1)
+session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
+}
+
 include("config.php");
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bajas</title>
+    <title>Bajas - Pokédex</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-<div>
-	<header>
-		<h1>APLICACION POKEMONS</h1>
-	</header>
-	<main>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="card shadow-sm p-4 text-center">
+            <header class="mb-4">
+                <h1 class="text-danger">APLICACIÓN POKEMONS</h1>
+            </header>
+            <main>
 
-<?php
-/*Obtiene el id del registro del empleado a eliminar, identificador, a partir de su URL. Se recibe el dato utilizando el método: GET 
-Recuerda que   existen dos métodos con los que el navegador puede enviar información al servidor:
-1.- Método HTTP GET. Información se envía de forma visible. A través de la URL (header HTTP Request )
-En PHP los datos se administran con el array asociativo $_GET. En nuestro caso el dato del empleado se obiene a través de la clave: $_GET['identificador']
-2.- Método HTTP POST. Información se envía de forma no visible. A través del cuerpo del HTTP Request 
-PHP proporciona el array asociativo $_POST para acceder a la información enviada.
-*/
+            <?php
+            // Comprobamos que el identificador existe en la URL
+            if (isset($_GET['identificador'])) {
+                $identificador = $mysqli->real_escape_string($_GET['identificador']);
 
-//Recoge el id del empleado a eliminar a través de la clave identificador del array asociativo $_GET y lo almacena en la variable identificador
-$identificador = $_GET['identificador'];
+                // 2. Consulta con tu nuevo nombre de columna: pokemons_id
+                $sql = "DELETE FROM pokemons WHERE pokemons_id = $identificador";
 
-//Con mysqli_real_scape_string protege caracteres especiales en una cadena para ser usada en una sentencia SQL.
-$identificador = $mysqli->real_escape_string($identificador);
+                if ($mysqli->query($sql)) {
+                    echo "<div class='alert alert-success'><h4>¡Éxito!</h4>Pokémon eliminado correctamente.</div>";
+                } else {
+                    echo "<div class='alert alert-danger'>Error al eliminar: " . $mysqli->error . "</div>";
+                }
+                
+                $mysqli->close();
+            } else {
+                echo "<div class='alert alert-warning'>No se ha proporcionado un ID válido.</div>";
+            }
 
-//Se realiza el borrado del registro: delete.
-$sql="DELETE FROM pokemons WHERE pokemons_id = $identificador";
-//echo 'SQL: ' . $sql . '<br>';
-$result = $mysqli->query($sql);
-//Se cierra la conexión de base de datos previamente abierta
-$mysqli->close();
-echo "<div>Pokémon eliminado correctamente...</div>";
-echo "<a href='home.php'>Ver resultado</a>";
-//Se redirige a la página principal: home.php
-//header("Location:home.php");
-?>
- 
-    </main>
-</div>
+            // 3. Redirección automática tras 2 segundos para mejorar la experiencia
+            header("refresh:2;url=home.php");
+            ?>
+            
+            <p class="text-muted mt-3 small">Redirigiendo a la lista principal...</p>
+            <a href='home.php' class="btn btn-primary mt-2">Volver ahora</a>
+            
+            </main>
+        </div>
+    </div>
 </body>
 </html>
-

@@ -1,150 +1,176 @@
 <?php
-//Incluye fichero con parámetros de conexión a la base de datos
+session_start();
 include_once("config.php");
 
-session_start();
-
+// 1. Control de acceso (Ejercicio 1)
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
     exit();
 }
+
+// 2. Obtener los datos del Pokémon actual
+if (isset($_GET['identificador'])) {
+    $id = $mysqli->real_escape_string($_GET['identificador']);
+    $resultado = $mysqli->query("SELECT * FROM pokemons WHERE pokemons_id = $id");
+    $pokemon = $resultado->fetch_assoc();
+
+    if (!$pokemon) {
+        header("Location: home.php?error=no_encontrado");
+        exit();
+    }
+} else {
+    header("Location: home.php");
+    exit();
+}
 ?>
 
-
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">	
-	<title>Modificaciones</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Pokémon - <?php echo $pokemon['nombre']; ?></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        body { background-color: #f8f9fa; font-family: 'Segoe UI', sans-serif; }
+        
+        /* Título Bonito con degradado naranja/amarillo (estilo evolución/energía) */
+        .edit-header {
+            background: linear-gradient(135deg, #f57f17 0%, #ffca28 100%);
+            color: white;
+            padding: 40px 20px;
+            border-radius: 20px 20px 0 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .icon-badge {
+            background: white;
+            color: #f57f17;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 2rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .card-edit {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-top: -20px;
+            background: white;
+        }
+
+        .form-label { font-weight: 600; color: #555; margin-top: 10px; }
+        .btn-update { background-color: #f57f17; color: white; font-weight: bold; border: none; }
+        .btn-update:hover { background-color: #e65100; color: white; }
+    </style>
 </head>
 <body>
-<div>
-	<header>
-		<h1>APLICACION POKEMONS</h1>
-	</header>
-	
-	<main>				
-	<h2>Modificación</h2>
 
-	<?php
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            
+            <div class="edit-header shadow">
+                <div class="icon-badge">
+                    <i class="bi bi-pencil-square"></i>
+                </div>
+                <h1 class="h2 fw-bold mb-0 text-uppercase">Modificar Registro</h1>
+                <p class="mb-0 opacity-75">Actualizando a: <strong><?php echo $pokemon['nombre']; ?></strong> (ID #<?php echo $pokemon['nº_pokedex']; ?>)</p>
+            </div>
 
+            <div class="card card-edit">
+                <div class="card-body p-4 p-md-5">
+                    
+                    <form action="edit_action.php" method="post">
+                        <input type="hidden" name="pokemons_id" value="<?php echo $pokemon['pokemons_id']; ?>">
 
-	/*Obtiene el id del registro del empleado a modificar, identificador, a partir de su URL. Este tipo de datos se accede utilizando el método: GET*/
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Nº Pokedex</label>
+                                <input type="number" name="n_pokedex" class="form-control" value="<?php echo $pokemon['nº_pokedex']; ?>" required>
+                            </div>
+                            <div class="col-md-8 mb-3">
+                                <label class="form-label">Nombre del Pokémon</label>
+                                <input type="text" name="nombre" class="form-control" value="<?php echo $pokemon['nombre']; ?>" required>
+                            </div>
+                        </div>
 
-	//Recoge el id del empleado a modificar a través de la clave identificador del array asociativo $_GET y lo almacena en la variable identificador
-	$identificador = $_GET['identificador'];
+                        <div class="mb-3">
+                            <label class="form-label">Tipo</label>
+                            <input type="text" name="tipo" class="form-control" value="<?php echo $pokemon['tipo']; ?>" required>
+                        </div>
 
-	//Con mysqli_real_scape_string protege caracteres especiales en una cadena para ser usada en una sentencia SQL.
-	$identificador = $mysqli->real_escape_string($identificador);
+                        <div class="mb-3">
+                            <label class="form-label">Descripción</label>
+                            <textarea name="descripcion" class="form-control" rows="3"><?php echo $pokemon['descripcion']; ?></textarea>
+                        </div>
 
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Habilidad</label>
+                                <input type="text" name="habilidad" class="form-control" value="<?php echo $pokemon['habilidad']; ?>" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Debilidad</label>
+                                <input type="text" name="debilidad" class="form-control" value="<?php echo $pokemon['debilidad']; ?>" required>
+                            </div>
+                        </div>
 
-	//Se selecciona el registro a modificar: select
-	$sql="SELECT * FROM pokemons WHERE pokemons_id = $identificador";
-	//echo 'SQL: ' . $sql . '<br>';
-	$resultado = $mysqli->query($sql);
+                        <div class="row mb-4">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Región</label>
+                                <select name="region" class="form-select">
+                                    <?php 
+                                    $regiones = ["Kanto", "Johto", "Hoenn", "Sinnoh", "Teselia", "Kalos", "Alola", "Galar", "Paldea"];
+                                    foreach($regiones as $r) {
+                                        $selected = ($pokemon['region'] == $r) ? "selected" : "";
+                                        echo "<option value='$r' $selected>$r</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Generación</label>
+                                <select name="generacion" class="form-select">
+                                    <?php 
+                                    for($i=1; $i<=9; $i++) {
+                                        $val = $i . "º";
+                                        $selected = ($pokemon['generacion'] == $val) ? "selected" : "";
+                                        echo "<option value='$val' $selected>$val</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
 
-	//Se extrae el registro y lo guarda en el array $fila
-	//Nota: También se puede utilizar el método fetch_assoc de la siguiente manera: $fila = $resultado->fetch_assoc();
-	$fila = $resultado->fetch_array();
-	$n_pokedex= $fila['nº_pokedex'];
-	$nombre = $fila['nombre'];
-	$tipo = $fila['tipo'];
-	$region = $fila['region'];
-	$generacion = $fila['generacion'];
-	$habilidad = $fila['habilidad'];
-	$debilidad = $fila['debilidad'];
-	$descripcion = $fila['descripcion'];
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="home.php" class="btn btn-light px-4">Cancelar</a>
+                            <button type="submit" name="modifica" class="btn btn-update px-5 shadow-sm">
+                                GUARDAR CAMBIOS
+                            </button>
+                        </div>
+                    </form>
 
-	//Se cierra la conexión de base de datos
-	$mysqli->close();
-	?>
+                </div>
+            </div>
 
-<!--FORMULARIO DE EDICIÓN. Al hacer click en el botón Guardar, llama a la página (form action="edit_action.php"): edit_action.php-->
-
-	<form action="edit_action.php" method="post" class="shadow p-4 bg-white rounded">
-    
-    <input type="hidden" name="identificador" value="<?php echo $identificador; ?>">
-
-    <div class="row">
-        <div class="col-md-4 mb-3">
-            <label for="n_pokedex" class="form-label fw-bold">Nº Pokedex</label>
-            <input type="number" name="n_pokedex" id="n_pokedex" class="form-control" value="<?php echo $n_pokedex; ?>" readonly>
+            <footer class="text-center mt-5 text-muted small">
+                <p>Sesión iniciada como: <?php echo $_SESSION['username']; ?></p>
+                Created by Alicia &copy; 2026
+            </footer>
         </div>
-
-        <div class="col-md-8 mb-3">
-            <label for="nombre" class="form-label fw-bold">Nombre</label>
-            <input type="text" name="nombre" id="nombre" class="form-control" value="<?php echo $nombre; ?>" required>
-        </div>
     </div>
-
-    <div class="mb-3">
-        <label for="tipo" class="form-label fw-bold">Tipo</label>
-        <input type="text" name="tipo" id="tipo" class="form-control" value="<?php echo $tipo; ?>" placeholder="Ej: Eléctrico">
-    </div>
-
-    <div class="mb-3">
-        <label for="region" class="form-label fw-bold">Región</label>
-        <select name="region" id="region" class="form-select">
-            <option value="<?php echo $region; ?>" selected><?php echo $region; ?> (Actual)</option>
-            <hr>
-            <option value="Kanto">Kanto</option>
-            <option value="Johto">Johto</option>
-            <option value="Hoenn">Hoenn</option>
-            <option value="Sinnoh">Sinnoh</option>
-            <option value="Teselia">Teselia</option>
-            <option value="Kalos">Kalos</option>
-            <option value="Alola">Alola</option>
-            <option value="Galar">Galar</option>
-            <option value="Paldea">Paldea</option>
-			<option value="Hisui">Hisui</option>
-            <option value="Unova">Unova</option>
-        </select>
-    </div>
-
-    <div class="mb-3">
-        <label for="habilidad" class="form-label fw-bold">Habilidad</label>
-        <input type="text" name="habilidad" id="habilidad" class="form-control" value="<?php echo $habilidad; ?>">
-    </div>
-	<div class="mb-3">
-        <label for="debilidad" class="form-label fw-bold">Debilidad</label>
-        <input type="text" name="debilidad" id="debilidad" class="form-control" value="<?php echo $debilidad; ?>">
-    </div>
-
-    <div class="mb-4">
-        <label for="descripcion" class="form-label fw-bold">Descripción de la Pokedex</label>
-        <textarea name="descripcion" id="descripcion" class="form-control" rows="3"><?php echo $descripcion; ?></textarea>
-    </div>
-
-	 <div class="mb-3">
-		<label for="generacion" class="form-label fw-bold">Generación</label>
-		<select name="generacion" id="generacion" class="form-select">
-			<option value="<?php echo $generacion; ?>" selected><?php echo $generacion; ?> (Actual)</option>
-			<hr>
-			<option value="1º">1º</option>
-			<option value="2º">2º</option>
-			<option value="3º">3º</option>
-			<option value="4º">4º</option>
-			<option value="5º">5º</option>
-			<option value="6º">6º</option>
-			<option value="7º">7º</option>
-			<option value="8º">8º</option>
-			<option value="9º">9º</option>
-		</select>
-
-		<div >
-			<input type="hidden" name="identificador" value=<?php echo $identificador;?>>
-			<button type="submit" name="modifica" value="si">Aceptar</button>
-			<button type="button" onclick="location.href='home.php'">Cancelar</button>	
-		</div>
-	</form>
-	</main>	
-	<footer>
-		<p><a href="home.php">Volver</a></p>	
-		<p><a href="logout.php">Cerrar sesión (Sign out) <?php echo $_SESSION['username']; ?></a></p>
-		Created by Alicia &copy; 2026
-  	</footer>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
 
