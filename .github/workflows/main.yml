@@ -19,7 +19,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/aliciasp2004/actividad61-aplicacion-crud-php:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/actividad61-aplicacion-crud-php:latest
   deploy: 
     name: CD - Deploy
     runs-on: ubuntu-latest
