@@ -2,13 +2,13 @@
 session_start();
 include_once("config.php");
 
-// 1. Control de acceso (Ejercicio 1)
+
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
     exit();
 }
 
-// 2. Obtener los datos del Pokémon actual
+
 if (isset($_GET['identificador'])) {
     $id = $mysqli->real_escape_string($_GET['identificador']);
     $resultado = $mysqli->query("SELECT * FROM pokemons WHERE pokemons_id = $id");
@@ -70,7 +70,7 @@ if (isset($_GET['identificador'])) {
         .btn-update { background-color: #f57f17; color: white; font-weight: bold; border: none; }
         .btn-update:hover { background-color: #e65100; color: white; }
         
-        /* Estilo para campos de solo lectura */
+        
         .form-control[readonly] {
             background-color: #e9ecef;
             cursor: not-allowed;

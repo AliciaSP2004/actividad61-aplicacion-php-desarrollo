@@ -11,7 +11,6 @@ FROM ubuntu:24.04
 ENV DEBIAN_FRONTEND=noninteractive 
 ENV TZ=Europe/Madrid
 
-# En este caso le asignamos unos valores por defecto a la aplicación CRUD PHP: "mariadb", "electroshop", "usuario", "usuario@1"
 ENV MARIADB_HOST=mariadb
 ENV MARIADB_DATABASE=pokemon_db
 ENV MARIADB_USER=usuarioAlSa

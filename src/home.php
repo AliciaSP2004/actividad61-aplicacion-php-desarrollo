@@ -2,7 +2,7 @@
 session_start();
 include_once("config.php");
 
-// Control de acceso - Ejercicio 1
+
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
     exit();

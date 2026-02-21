@@ -1,6 +1,5 @@
 <?php
 session_start();
-// Si ya hay una sesión activa, no mostramos el login y mandamos al home
 if (isset($_SESSION['username'])) {
     header("Location: home.php");
     exit();

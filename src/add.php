@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// Control de acceso: Ejercicio 1
+// Control de acceso
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
     exit();

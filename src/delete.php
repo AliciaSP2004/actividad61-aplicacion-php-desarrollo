@@ -1,5 +1,4 @@
 <?php
-// 1. Iniciamos sesión para verificar que el usuario está logueado (Seguridad Ejercicio 1)
 session_start();
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
@@ -26,11 +25,11 @@ include("config.php");
             <main>
 
             <?php
-            // Comprobamos que el identificador existe en la URL
+            
             if (isset($_GET['identificador'])) {
                 $identificador = $mysqli->real_escape_string($_GET['identificador']);
 
-                // 2. Consulta con tu nuevo nombre de columna: pokemons_id
+                
                 $sql = "DELETE FROM pokemons WHERE pokemons_id = $identificador";
 
                 if ($mysqli->query($sql)) {
@@ -44,7 +43,7 @@ include("config.php");
                 echo "<div class='alert alert-warning'>No se ha proporcionado un ID válido.</div>";
             }
 
-            // 3. Redirección automática tras 2 segundos para mejorar la experiencia
+            
             header("refresh:2;url=home.php");
             ?>
             
