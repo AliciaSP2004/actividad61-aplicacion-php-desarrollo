@@ -58,7 +58,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <h1 class="display-2 fw-bold mb-3">GESTIÓN POKÉDEX</h1>
-            <p class="lead mb-5">La herramienta definitiva para entrenadores. Organiza, edita y gestiona tu equipo de Pokémon de manera profesional.</p>
+            <p class="lead mb-5">La herramienta definitiva para entrenadores. Organiza, edita y gestiona tu equipo de Pokémon.</p>
             
             <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
                 <a href="login.php" class="btn btn-pokedex btn-lg shadow">
