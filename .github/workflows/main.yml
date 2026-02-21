@@ -33,6 +33,7 @@ jobs:
           key: ${{ secrets.AWS_SSH_KEY }}
           script: |
             cd ~/actividad61-aplicacion-php-produccion
-            docker-compose pull
-            docker-compose up -d --force-recreate
-            docker image prune -f
+            docker compose pull
+            docker compose down
+            docker compose up -d
+            docker image prune -a -f
