@@ -35,7 +35,8 @@ RUN apt-get update \
 # COPY /src /var/www/html
 
 # Copia la configuración del sitio en el directorio de configuración de los sitios de apache (/etc/apache2/sites-available)
-
+RUN rm -f /var/www/html/index.html
+COPY src/ /var/www/html/
 COPY /conf/000-default.conf /etc/apache2/sites-available/
 
 # EXPOSE: INFORMA de los puertos que utilizará el contenedor cuando esté en ejecución

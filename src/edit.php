@@ -35,7 +35,6 @@ if (isset($_GET['identificador'])) {
     <style>
         body { background-color: #f8f9fa; font-family: 'Segoe UI', sans-serif; }
         
-        /* Título Bonito con degradado naranja/amarillo (estilo evolución/energía) */
         .edit-header {
             background: linear-gradient(135deg, #f57f17 0%, #ffca28 100%);
             color: white;
@@ -70,6 +69,13 @@ if (isset($_GET['identificador'])) {
         .form-label { font-weight: 600; color: #555; margin-top: 10px; }
         .btn-update { background-color: #f57f17; color: white; font-weight: bold; border: none; }
         .btn-update:hover { background-color: #e65100; color: white; }
+        
+        /* Estilo para campos de solo lectura */
+        .form-control[readonly] {
+            background-color: #e9ecef;
+            cursor: not-allowed;
+            opacity: 0.8;
+        }
     </style>
 </head>
 <body>
@@ -90,16 +96,16 @@ if (isset($_GET['identificador'])) {
                 <div class="card-body p-4 p-md-5">
                     
                     <form action="edit_action.php" method="post">
-                        <input type="hidden" name="pokemons_id" value="<?php echo $pokemon['pokemons_id']; ?>">
+                        <input type="hidden" name="identificador" value="<?php echo $pokemon['pokemons_id']; ?>">
 
                         <div class="row">
                             <div class="col-md-4 mb-3">
-                                <label class="form-label">Nº Pokedex</label>
-                                <input type="number" name="n_pokedex" class="form-control" value="<?php echo $pokemon['nº_pokedex']; ?>" required>
+                                <label class="form-label">Nº Pokedex (No editable)</label>
+                                <input type="number" name="n_pokedex" class="form-control" value="<?php echo $pokemon['nº_pokedex']; ?>" readonly>
                             </div>
                             <div class="col-md-8 mb-3">
-                                <label class="form-label">Nombre del Pokémon</label>
-                                <input type="text" name="nombre" class="form-control" value="<?php echo $pokemon['nombre']; ?>" required>
+                                <label class="form-label">Nombre del Pokémon (No editable)</label>
+                                <input type="text" name="nombre" class="form-control" value="<?php echo $pokemon['nombre']; ?>" readonly>
                             </div>
                         </div>
 
@@ -173,4 +179,3 @@ if (isset($_GET['identificador'])) {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
