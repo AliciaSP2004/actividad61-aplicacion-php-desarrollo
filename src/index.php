@@ -57,7 +57,7 @@
 <div class="container content text-center">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <h1 class="display-2 fw-bold mb-3">GESTIÓN DE POKEMONS</h1>
+            <h1 class="display-2 fw-bold mb-3">GESTIÓN VIRTUAL DE POKEMONS</h1>
             <p class="lead mb-5">La herramienta definitiva para entrenadores. Organiza, edita y gestiona tu equipo de Pokémon.</p>
             
             <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
